@@ -213,13 +213,14 @@ preloadImages();
 // COOL INTERACTIVE EFFECTS 🔥
 // ========================================
 
-// Cursor Trail Effect - Optimized
+// Cursor Trail Effect - ULTRA OPTIMIZED
 function initCursorTrail() {
     const trail = [];
-    const trailLength = 10; // Reduced for better performance
+    const trailLength = 6; // Further reduced for performance
     let mouseX = 0;
     let mouseY = 0;
     let isMoving = false;
+    let animationId;
     
     // Create trail elements
     for (let i = 0; i < trailLength; i++) {
@@ -227,22 +228,23 @@ function initCursorTrail() {
         dot.className = 'cursor-trail';
         dot.style.cssText = `
             position: fixed;
-            width: 3px;
-            height: 3px;
+            width: 2px;
+            height: 2px;
             background: #00ff00;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             opacity: ${1 - (i / trailLength)};
             transform: scale(${1 - (i / trailLength)});
-            box-shadow: 0 0 8px #00ff00;
+            box-shadow: 0 0 4px #00ff00;
             will-change: transform, opacity;
+            transition: all 0.1s ease;
         `;
         document.body.appendChild(dot);
         trail.push({ element: dot, x: 0, y: 0 });
     }
     
-    // Throttled mouse move
+    // Throttled mouse move - much more aggressive
     let mouseMoveTimeout;
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
@@ -254,7 +256,7 @@ function initCursorTrail() {
         }
         mouseMoveTimeout = setTimeout(() => {
             isMoving = false;
-        }, 100);
+        }, 50); // Reduced timeout
     });
     
     function updateTrail() {
@@ -270,22 +272,29 @@ function initCursorTrail() {
                 trailDot.element.style.left = x + 'px';
                 trailDot.element.style.top = y + 'px';
                 
-                x += (nextDot.x - x) * 0.4;
-                y += (nextDot.y - y) * 0.4;
+                x += (nextDot.x - x) * 0.5; // Faster following
+                y += (nextDot.y - y) * 0.5;
             });
         }
         
-        requestAnimationFrame(updateTrail);
+        animationId = requestAnimationFrame(updateTrail);
     }
     
     updateTrail();
+    
+    // Cleanup function
+    return () => {
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+    };
 }
 
-// Binary Rain Effect - COMPLETELY REWRITTEN
+// Matrix Code Rain - WORKING VERSION
 function initBinaryRain() {
-    const binaryContainer = document.createElement('div');
-    binaryContainer.className = 'binary-rain';
-    binaryContainer.style.cssText = `
+    const matrixContainer = document.createElement('div');
+    matrixContainer.className = 'matrix-rain';
+    matrixContainer.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
@@ -294,69 +303,74 @@ function initBinaryRain() {
         pointer-events: none;
         z-index: -1;
         overflow: hidden;
+        background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.1) 50%, transparent 100%);
     `;
-    document.body.appendChild(binaryContainer);
+    document.body.appendChild(matrixContainer);
     
-    const binaryChars = '01';
-    const columns = Math.floor(window.innerWidth / 20);
-    const binaryColumns = [];
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+    const drops = [];
+    const fontSize = 14;
+    const columns = Math.floor(window.innerWidth / fontSize);
     
-    // Create columns
+    // Initialize drops
     for (let i = 0; i < columns; i++) {
-        const column = document.createElement('div');
-        column.className = 'binary-column';
-        column.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: ${i * 20}px;
-            width: 20px;
-            height: 100vh;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: #00ff00;
-            opacity: 0.3;
-            line-height: 1.1;
-            will-change: transform;
-            overflow: hidden;
-        `;
+        drops[i] = Math.random() * 100;
+    }
+    
+    function drawMatrix() {
+        // Clear canvas effect with semi-transparent black
+        matrixContainer.style.background = 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%)';
         
-        binaryContainer.appendChild(column);
-        binaryColumns.push({
-            element: column,
-            position: -Math.random() * 1000,
-            speed: 1 + Math.random() * 3,
-            chars: generateBinaryString(50)
-        });
-    }
-    
-    function generateBinaryString(length) {
-        let str = '';
-        for (let i = 0; i < length; i++) {
-            str += binaryChars[Math.floor(Math.random() * binaryChars.length)] + '<br>';
-        }
-        return str;
-    }
-    
-    function animateBinaryRain() {
-        binaryColumns.forEach(column => {
-            column.position += column.speed;
+        for (let i = 0; i < drops.length; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
             
-            if (column.position > window.innerHeight + 100) {
-                column.position = -100;
-                column.chars = generateBinaryString(50);
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.cssText = `
+                position: absolute;
+                left: ${x}px;
+                top: ${y}px;
+                color: #00ff00;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: ${fontSize}px;
+                opacity: ${Math.random() * 0.5 + 0.3};
+                text-shadow: 0 0 5px #00ff00;
+            `;
+            
+            matrixContainer.appendChild(span);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (span.parentNode) {
+                    span.parentNode.removeChild(span);
+                }
+            }, 100);
+            
+            // Reset drop
+            if (drops[i] * fontSize > window.innerHeight && Math.random() > 0.975) {
+                drops[i] = 0;
             }
             
-            column.element.style.transform = `translateY(${column.position}px)`;
-            column.element.innerHTML = column.chars;
-        });
-        
-        requestAnimationFrame(animateBinaryRain);
+            drops[i]++;
+        }
     }
     
-    animateBinaryRain();
+    // Throttled animation
+    let lastTime = 0;
+    function animateMatrix(currentTime) {
+        if (currentTime - lastTime > 50) { // 20fps for performance
+            drawMatrix();
+            lastTime = currentTime;
+        }
+        requestAnimationFrame(animateMatrix);
+    }
+    
+    animateMatrix(0);
 }
 
-// Particle Effects - Optimized
+// Particle Effects - ULTRA OPTIMIZED
 function initParticleEffects() {
     const particleContainer = document.createElement('div');
     particleContainer.className = 'particle-container';
@@ -373,11 +387,10 @@ function initParticleEffects() {
     document.body.appendChild(particleContainer);
     
     const particles = [];
-    const maxParticles = 50; // Limit particles for performance
+    const maxParticles = 20; // Much lower for performance
     
     function createParticle(x, y) {
         if (particles.length >= maxParticles) {
-            // Remove oldest particle
             const oldParticle = particles.shift();
             if (oldParticle && oldParticle.parentNode) {
                 oldParticle.parentNode.removeChild(oldParticle);
@@ -389,52 +402,37 @@ function initParticleEffects() {
             position: absolute;
             left: ${x}px;
             top: ${y}px;
-            width: 2px;
-            height: 2px;
+            width: 1px;
+            height: 1px;
             background: #00ff00;
             border-radius: 50%;
             pointer-events: none;
-            box-shadow: 0 0 8px #00ff00;
+            box-shadow: 0 0 4px #00ff00;
             will-change: transform, opacity;
         `;
         
         particleContainer.appendChild(particle);
         particles.push(particle);
         
-        // Animate particle
-        let frame = 0;
-        const maxFrames = 120; // 2 seconds at 60fps
-        const vx = (Math.random() - 0.5) * 2;
-        const vy = -2 - Math.random() * 2;
+        // Simple CSS animation instead of JS
+        particle.style.animation = 'particleFloat 2s ease-out forwards';
         
-        function animateParticle() {
-            frame++;
-            const progress = frame / maxFrames;
-            
-            particle.style.transform = `translate(${vx * frame}px, ${vy * frame}px) scale(${1 - progress})`;
-            particle.style.opacity = 1 - progress;
-            
-            if (frame < maxFrames) {
-                requestAnimationFrame(animateParticle);
-            } else {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-                const index = particles.indexOf(particle);
-                if (index > -1) {
-                    particles.splice(index, 1);
-                }
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
             }
-        }
-        
-        animateParticle();
+            const index = particles.indexOf(particle);
+            if (index > -1) {
+                particles.splice(index, 1);
+            }
+        }, 2000);
     }
     
-    // Create particles on mouse move - throttled
+    // Much more throttled
     let lastParticleTime = 0;
     document.addEventListener('mousemove', function(e) {
         const now = Date.now();
-        if (now - lastParticleTime > 150) { // Increased throttle
+        if (now - lastParticleTime > 300) { // Much higher throttle
             createParticle(e.clientX, e.clientY);
             lastParticleTime = now;
         }
@@ -586,7 +584,7 @@ function initClickExplosions() {
     }
 }
 
-// MIND-BLOWING EFFECTS 🔥
+// MIND-BLOWING EFFECTS - PERFORMANCE OPTIMIZED 🔥
 function initMindBlowingEffects() {
     // 1. Matrix-style glitch text effect
     initGlitchText();
@@ -594,20 +592,14 @@ function initMindBlowingEffects() {
     // 2. Holographic shimmer on hover
     initHolographicShimmer();
     
-    // 3. Quantum tunnel effect on scroll
-    initQuantumTunnel();
+    // 3. Simple pulse effect
+    initSimplePulse();
     
-    // 4. Neural network pulse
-    initNeuralPulse();
-    
-    // 5. Dimensional shift on click
+    // 4. Dimensional shift on click (simplified)
     initDimensionalShift();
     
-    // 6. Liquid morphing background
-    initLiquidMorph();
-    
-    // 7. Data stream effect
-    initDataStream();
+    // 5. Floating orbs background
+    initFloatingOrbs();
 }
 
 // Glitch Text Effect
@@ -661,54 +653,10 @@ function initHolographicShimmer() {
     });
 }
 
-// Quantum Tunnel Effect
-function initQuantumTunnel() {
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout);
-        }
-        
-        scrollTimeout = setTimeout(() => {
-            createQuantumTunnel();
-        }, 100);
-    });
-    
-    function createQuantumTunnel() {
-        const tunnel = document.createElement('div');
-        tunnel.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, 
-                transparent 0%, 
-                rgba(0, 255, 0, 0.1) 30%, 
-                rgba(0, 255, 255, 0.2) 60%, 
-                transparent 100%
-            );
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1000;
-            transform: translate(-50%, -50%) scale(0);
-            animation: quantumTunnel 2s ease-out forwards;
-        `;
-        
-        document.body.appendChild(tunnel);
-        
-        setTimeout(() => {
-            if (tunnel.parentNode) {
-                tunnel.parentNode.removeChild(tunnel);
-            }
-        }, 2000);
-    }
-}
-
-// Neural Network Pulse
-function initNeuralPulse() {
+// Simple Pulse Effect
+function initSimplePulse() {
     const pulseContainer = document.createElement('div');
-    pulseContainer.className = 'neural-pulse';
+    pulseContainer.className = 'simple-pulse';
     pulseContainer.style.cssText = `
         position: fixed;
         top: 0;
@@ -717,10 +665,8 @@ function initNeuralPulse() {
         height: 100%;
         pointer-events: none;
         z-index: -1;
-        background: radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 40%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
-        animation: neuralPulse 4s ease-in-out infinite;
+        background: radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.03) 0%, transparent 70%);
+        animation: simplePulse 3s ease-in-out infinite;
     `;
     document.body.appendChild(pulseContainer);
 }
@@ -757,32 +703,11 @@ function initDimensionalShift() {
     });
 }
 
-// Liquid Morph
-function initLiquidMorph() {
-    const morphContainer = document.createElement('div');
-    morphContainer.className = 'liquid-morph';
-    morphContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: -1;
-        background: 
-            radial-gradient(ellipse at 10% 20%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
-            radial-gradient(ellipse at 90% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(ellipse at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
-        animation: liquidMorph 8s ease-in-out infinite;
-    `;
-    document.body.appendChild(morphContainer);
-}
-
-// Data Stream Effect
-function initDataStream() {
-    const dataContainer = document.createElement('div');
-    dataContainer.className = 'data-stream';
-    dataContainer.style.cssText = `
+// Floating Orbs Background
+function initFloatingOrbs() {
+    const orbsContainer = document.createElement('div');
+    orbsContainer.className = 'floating-orbs';
+    orbsContainer.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
@@ -792,39 +717,24 @@ function initDataStream() {
         z-index: -1;
         overflow: hidden;
     `;
-    document.body.appendChild(dataContainer);
+    document.body.appendChild(orbsContainer);
     
-    function createDataStream() {
-        const stream = document.createElement('div');
-        const x = Math.random() * window.innerWidth;
-        const speed = 2 + Math.random() * 3;
-        
-        stream.style.cssText = `
+    // Create 3 floating orbs
+    for (let i = 0; i < 3; i++) {
+        const orb = document.createElement('div');
+        orb.style.cssText = `
             position: absolute;
-            left: ${x}px;
-            top: -50px;
-            width: 2px;
-            height: 100px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                #00ff00 50%, 
-                transparent 100%
-            );
-            animation: dataStream ${speed}s linear forwards;
-            box-shadow: 0 0 10px #00ff00;
+            width: ${50 + Math.random() * 100}px;
+            height: ${50 + Math.random() * 100}px;
+            background: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: floatOrb ${8 + Math.random() * 4}s ease-in-out infinite;
+            animation-delay: ${Math.random() * 2}s;
         `;
-        
-        dataContainer.appendChild(stream);
-        
-        setTimeout(() => {
-            if (stream.parentNode) {
-                stream.parentNode.removeChild(stream);
-            }
-        }, speed * 1000);
+        orbsContainer.appendChild(orb);
     }
-    
-    // Create streams periodically
-    setInterval(createDataStream, 200);
 }
 
 // Add CSS animations for the effects
@@ -881,65 +791,48 @@ style.textContent = `
         }
     }
     
-    @keyframes neuralPulse {
+    @keyframes simplePulse {
         0%, 100% { 
-            opacity: 0.05;
+            opacity: 0.03;
             transform: scale(1);
         }
         50% { 
-            opacity: 0.15;
-            transform: scale(1.1);
+            opacity: 0.08;
+            transform: scale(1.05);
         }
     }
     
     @keyframes dimensionalShift {
         0% { 
             opacity: 0;
-            transform: scale(0.8) rotate(0deg);
+            transform: scale(0.9);
         }
         50% { 
-            opacity: 1;
-            transform: scale(1.1) rotate(180deg);
+            opacity: 0.5;
+            transform: scale(1.05);
         }
         100% { 
             opacity: 0;
-            transform: scale(1.2) rotate(360deg);
+            transform: scale(1.1);
         }
     }
     
-    @keyframes liquidMorph {
+    @keyframes floatOrb {
         0%, 100% { 
-            transform: scale(1) rotate(0deg);
-            filter: hue-rotate(0deg);
+            transform: translate(0, 0) scale(1);
+            opacity: 0.1;
         }
         25% { 
-            transform: scale(1.1) rotate(90deg);
-            filter: hue-rotate(90deg);
+            transform: translate(20px, -20px) scale(1.1);
+            opacity: 0.2;
         }
         50% { 
-            transform: scale(0.9) rotate(180deg);
-            filter: hue-rotate(180deg);
+            transform: translate(-10px, -30px) scale(0.9);
+            opacity: 0.15;
         }
         75% { 
-            transform: scale(1.05) rotate(270deg);
-            filter: hue-rotate(270deg);
-        }
-    }
-    
-    @keyframes dataStream {
-        0% { 
-            transform: translateY(-100px);
-            opacity: 0;
-        }
-        10% { 
-            opacity: 1;
-        }
-        90% { 
-            opacity: 1;
-        }
-        100% { 
-            transform: translateY(100vh);
-            opacity: 0;
+            transform: translate(30px, 10px) scale(1.05);
+            opacity: 0.18;
         }
     }
     
