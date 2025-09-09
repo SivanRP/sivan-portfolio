@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initBinaryRain();
     initParticleEffects();
     initInteractiveGlow();
+    initClickExplosions();
 });
 
 // ========================================
@@ -211,10 +212,13 @@ preloadImages();
 // COOL INTERACTIVE EFFECTS 🔥
 // ========================================
 
-// Cursor Trail Effect
+// Cursor Trail Effect - Optimized
 function initCursorTrail() {
     const trail = [];
-    const trailLength = 20;
+    const trailLength = 10; // Reduced for better performance
+    let mouseX = 0;
+    let mouseY = 0;
+    let isMoving = false;
     
     // Create trail elements
     for (let i = 0; i < trailLength; i++) {
@@ -222,41 +226,53 @@ function initCursorTrail() {
         dot.className = 'cursor-trail';
         dot.style.cssText = `
             position: fixed;
-            width: 4px;
-            height: 4px;
+            width: 3px;
+            height: 3px;
             background: #00ff00;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             opacity: ${1 - (i / trailLength)};
             transform: scale(${1 - (i / trailLength)});
-            box-shadow: 0 0 10px #00ff00;
+            box-shadow: 0 0 8px #00ff00;
+            will-change: transform, opacity;
         `;
         document.body.appendChild(dot);
-        trail.push(dot);
+        trail.push({ element: dot, x: 0, y: 0 });
     }
     
-    let mouseX = 0;
-    let mouseY = 0;
-    
+    // Throttled mouse move
+    let mouseMoveTimeout;
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
+        isMoving = true;
+        
+        if (mouseMoveTimeout) {
+            clearTimeout(mouseMoveTimeout);
+        }
+        mouseMoveTimeout = setTimeout(() => {
+            isMoving = false;
+        }, 100);
     });
     
     function updateTrail() {
-        let x = mouseX;
-        let y = mouseY;
-        
-        trail.forEach((dot, index) => {
-            const nextDot = trail[index + 1] || { offsetLeft: x, offsetTop: y };
+        if (isMoving) {
+            let x = mouseX;
+            let y = mouseY;
             
-            dot.style.left = x + 'px';
-            dot.style.top = y + 'px';
-            
-            x += (nextDot.offsetLeft - x) * 0.3;
-            y += (nextDot.offsetTop - y) * 0.3;
-        });
+            trail.forEach((trailDot, index) => {
+                const nextDot = trail[index + 1] || { x: x, y: y };
+                
+                trailDot.x = x;
+                trailDot.y = y;
+                trailDot.element.style.left = x + 'px';
+                trailDot.element.style.top = y + 'px';
+                
+                x += (nextDot.x - x) * 0.4;
+                y += (nextDot.y - y) * 0.4;
+            });
+        }
         
         requestAnimationFrame(updateTrail);
     }
@@ -264,7 +280,7 @@ function initCursorTrail() {
     updateTrail();
 }
 
-// Binary Rain Effect
+// Binary Rain Effect - Fixed
 function initBinaryRain() {
     const binaryContainer = document.createElement('div');
     binaryContainer.className = 'binary-rain';
@@ -281,7 +297,7 @@ function initBinaryRain() {
     document.body.appendChild(binaryContainer);
     
     const binaryChars = '01';
-    const columns = Math.floor(window.innerWidth / 20);
+    const columns = Math.floor(window.innerWidth / 25);
     
     for (let i = 0; i < columns; i++) {
         createBinaryColumn(i);
@@ -289,31 +305,54 @@ function initBinaryRain() {
     
     function createBinaryColumn(index) {
         const column = document.createElement('div');
+        column.className = 'binary-column';
         column.style.cssText = `
             position: absolute;
             top: -100px;
-            left: ${index * 20}px;
-            width: 20px;
+            left: ${index * 25}px;
+            width: 25px;
             height: 100vh;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
+            font-size: 12px;
             color: #00ff00;
-            opacity: 0.1;
-            animation: binaryFall ${3 + Math.random() * 4}s linear infinite;
-            animation-delay: ${Math.random() * 2}s;
+            opacity: 0.15;
+            line-height: 1.2;
+            will-change: transform;
         `;
         
         let binaryString = '';
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 40; i++) {
             binaryString += binaryChars[Math.floor(Math.random() * binaryChars.length)] + '<br>';
         }
         column.innerHTML = binaryString;
         
+        // Start animation
+        let position = -100;
+        const speed = 0.5 + Math.random() * 1.5;
+        
+        function animate() {
+            position += speed;
+            column.style.transform = `translateY(${position}px)`;
+            
+            if (position > window.innerHeight + 100) {
+                position = -100;
+                // Regenerate binary string
+                let newBinaryString = '';
+                for (let i = 0; i < 40; i++) {
+                    newBinaryString += binaryChars[Math.floor(Math.random() * binaryChars.length)] + '<br>';
+                }
+                column.innerHTML = newBinaryString;
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
         binaryContainer.appendChild(column);
     }
 }
 
-// Particle Effects
+// Particle Effects - Optimized
 function initParticleEffects() {
     const particleContainer = document.createElement('div');
     particleContainer.className = 'particle-container';
@@ -329,7 +368,18 @@ function initParticleEffects() {
     `;
     document.body.appendChild(particleContainer);
     
+    const particles = [];
+    const maxParticles = 50; // Limit particles for performance
+    
     function createParticle(x, y) {
+        if (particles.length >= maxParticles) {
+            // Remove oldest particle
+            const oldParticle = particles.shift();
+            if (oldParticle && oldParticle.parentNode) {
+                oldParticle.parentNode.removeChild(oldParticle);
+            }
+        }
+        
         const particle = document.createElement('div');
         particle.style.cssText = `
             position: absolute;
@@ -340,24 +390,47 @@ function initParticleEffects() {
             background: #00ff00;
             border-radius: 50%;
             pointer-events: none;
-            animation: particleFloat ${2 + Math.random() * 3}s ease-out forwards;
-            box-shadow: 0 0 10px #00ff00;
+            box-shadow: 0 0 8px #00ff00;
+            will-change: transform, opacity;
         `;
         
         particleContainer.appendChild(particle);
+        particles.push(particle);
         
-        setTimeout(() => {
-            if (particle.parentNode) {
-                particle.parentNode.removeChild(particle);
+        // Animate particle
+        let frame = 0;
+        const maxFrames = 120; // 2 seconds at 60fps
+        const vx = (Math.random() - 0.5) * 2;
+        const vy = -2 - Math.random() * 2;
+        
+        function animateParticle() {
+            frame++;
+            const progress = frame / maxFrames;
+            
+            particle.style.transform = `translate(${vx * frame}px, ${vy * frame}px) scale(${1 - progress})`;
+            particle.style.opacity = 1 - progress;
+            
+            if (frame < maxFrames) {
+                requestAnimationFrame(animateParticle);
+            } else {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+                const index = particles.indexOf(particle);
+                if (index > -1) {
+                    particles.splice(index, 1);
+                }
             }
-        }, 5000);
+        }
+        
+        animateParticle();
     }
     
-    // Create particles on mouse move
+    // Create particles on mouse move - throttled
     let lastParticleTime = 0;
     document.addEventListener('mousemove', function(e) {
         const now = Date.now();
-        if (now - lastParticleTime > 100) {
+        if (now - lastParticleTime > 150) { // Increased throttle
             createParticle(e.clientX, e.clientY);
             lastParticleTime = now;
         }
@@ -381,14 +454,146 @@ function initInteractiveGlow() {
     });
 }
 
+// Click Explosions with Self-Repairing Holes
+function initClickExplosions() {
+    const explosionContainer = document.createElement('div');
+    explosionContainer.className = 'explosion-container';
+    explosionContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1000;
+        overflow: hidden;
+    `;
+    document.body.appendChild(explosionContainer);
+    
+    const holes = [];
+    
+    document.addEventListener('click', function(e) {
+        createExplosion(e.clientX, e.clientY);
+        createHole(e.clientX, e.clientY);
+    });
+    
+    function createExplosion(x, y) {
+        // Create explosion particles
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                left: ${x}px;
+                top: ${y}px;
+                width: 4px;
+                height: 4px;
+                background: #00ff00;
+                border-radius: 50%;
+                pointer-events: none;
+                box-shadow: 0 0 15px #00ff00;
+                will-change: transform, opacity;
+            `;
+            
+            const angle = (Math.PI * 2 * i) / 15;
+            const velocity = 50 + Math.random() * 100;
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity;
+            
+            explosionContainer.appendChild(particle);
+            
+            let frame = 0;
+            const maxFrames = 60;
+            
+            function animateParticle() {
+                frame++;
+                const progress = frame / maxFrames;
+                
+                particle.style.transform = `translate(${vx * progress}px, ${vy * progress}px) scale(${1 - progress})`;
+                particle.style.opacity = 1 - progress;
+                
+                if (frame < maxFrames) {
+                    requestAnimationFrame(animateParticle);
+                } else {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }
+            }
+            
+            animateParticle();
+        }
+    }
+    
+    function createHole(x, y) {
+        const hole = document.createElement('div');
+        const size = 80 + Math.random() * 40;
+        const id = Date.now() + Math.random();
+        
+        hole.className = 'explosion-hole';
+        hole.style.cssText = `
+            position: fixed;
+            left: ${x - size/2}px;
+            top: ${y - size/2}px;
+            width: ${size}px;
+            height: ${size}px;
+            background: radial-gradient(circle, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.8) 70%, rgba(0, 0, 0, 0.9) 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            will-change: transform, opacity;
+            animation: holeExpand 0.3s ease-out;
+        `;
+        
+        explosionContainer.appendChild(hole);
+        holes.push({ element: hole, id: id, x: x, y: y, size: size });
+        
+        // Start self-repair after 2 seconds
+        setTimeout(() => {
+            repairHole(hole, id);
+        }, 2000);
+    }
+    
+    function repairHole(hole, id) {
+        let frame = 0;
+        const maxFrames = 60;
+        
+        function animateRepair() {
+            frame++;
+            const progress = frame / maxFrames;
+            
+            hole.style.opacity = 1 - progress;
+            hole.style.transform = `scale(${1 + progress * 0.5})`;
+            
+            if (frame < maxFrames) {
+                requestAnimationFrame(animateRepair);
+            } else {
+                if (hole.parentNode) {
+                    hole.parentNode.removeChild(hole);
+                }
+                // Remove from holes array
+                const index = holes.findIndex(h => h.id === id);
+                if (index > -1) {
+                    holes.splice(index, 1);
+                }
+            }
+        }
+        
+        animateRepair();
+    }
+}
+
 // Add CSS animations for the effects
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes binaryFall {
-        0% { transform: translateY(-100vh); opacity: 0; }
-        10% { opacity: 0.1; }
-        90% { opacity: 0.1; }
-        100% { transform: translateY(100vh); opacity: 0; }
+    @keyframes holeExpand {
+        0% { 
+            transform: scale(0);
+            opacity: 0;
+        }
+        100% { 
+            transform: scale(1);
+            opacity: 1;
+        }
     }
     
     @keyframes particleFloat {
@@ -404,6 +609,23 @@ style.textContent = `
     
     .cursor-trail {
         transition: all 0.1s ease;
+    }
+    
+    .explosion-hole {
+        animation: holeExpand 0.3s ease-out;
+    }
+    
+    /* Performance optimizations */
+    .binary-column {
+        will-change: transform;
+    }
+    
+    .cursor-trail {
+        will-change: transform, opacity;
+    }
+    
+    .particle-container > div {
+        will-change: transform, opacity;
     }
 `;
 document.head.appendChild(style);
