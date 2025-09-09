@@ -1,4 +1,65 @@
 /* ========================================
+   THEME TOGGLE - MIND-BLOWING!
+   ======================================== */
+
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-text {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover .theme-text {
+  color: var(--primary-color);
+}
+
+#themeIcon {
+  font-size: var(--text-lg);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.theme-toggle:hover #themeIcon {
+  transform: rotate(180deg) scale(1.1);
+  color: var(--primary-color);
+}
+
+/* Light theme styles */
+[data-theme="light"] .theme-toggle {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* ========================================
    MODERN PORTFOLIO STYLES - SIVAN PUSHPAGIRI
    ======================================== */
 
@@ -2505,7 +2566,7 @@ a:hover {
   }
   
   .footer-social {
-    justify-content: center;
+  justify-content: center;
   }
 }
 
@@ -2539,6 +2600,298 @@ a:hover {
     flex-direction: column;
     gap: var(--space-3);
   }
+}
+
+/* ========================================
+   TREE DATA STRUCTURE VISUALIZATION - MIND-BLOWING!
+   ======================================== */
+
+.tree-container {
+  display: flex;
+  gap: var(--space-8);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  min-height: 600px;
+}
+
+.tree-canvas {
+  flex: 2;
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.05), 
+    rgba(6, 182, 212, 0.05), 
+    rgba(16, 185, 129, 0.05));
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-8);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.tree-node {
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 10;
+}
+
+.tree-node:hover {
+  transform: scale(1.1);
+  z-index: 20;
+}
+
+.node-content {
+  background: var(--bg-card);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  text-align: center;
+  min-width: 120px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.tree-node:hover .node-content {
+  border-color: var(--primary-color);
+  box-shadow: 
+    var(--shadow-2xl),
+    0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.node-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-2);
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+@keyframes nodePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.node-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.node-subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.node-progress {
+  font-size: var(--text-xs);
+  color: var(--primary-color);
+  font-weight: 600;
+  background: rgba(99, 102, 241, 0.1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+/* Node positioning based on levels */
+.root-node {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.foundation-node:nth-child(2) {
+  top: 20%;
+  left: 20%;
+}
+
+.foundation-node:nth-child(3) {
+  top: 20%;
+  right: 20%;
+}
+
+.foundation-node:nth-child(4) {
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.framework-node:nth-child(5) {
+  top: 40%;
+  left: 10%;
+}
+
+.framework-node:nth-child(6) {
+  top: 40%;
+  right: 10%;
+}
+
+.framework-node:nth-child(7) {
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.specialization-node:nth-child(8) {
+  top: 60%;
+  left: 15%;
+}
+
+.specialization-node:nth-child(9) {
+  top: 60%;
+  right: 15%;
+}
+
+.specialization-node:nth-child(10) {
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mastery-node {
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Tree connections */
+.node-connections {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  animation: connectionPulse 3s ease-in-out infinite;
+}
+
+@keyframes connectionPulse {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* Tree particles */
+.tree-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  animation: particleFloat 8s ease-in-out infinite;
+}
+
+.particle-1 {
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  top: 30%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.particle-3 {
+  bottom: 20%;
+  left: 30%;
+  animation-delay: 4s;
+}
+
+.particle-4 {
+  top: 50%;
+  right: 25%;
+  animation-delay: 6s;
+}
+
+.particle-5 {
+  bottom: 40%;
+  left: 60%;
+  animation-delay: 1s;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* Tree Info Panel */
+.tree-info-panel {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: var(--space-8);
+  height: fit-content;
+}
+
+.info-content h3 {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.info-content p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.skill-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3);
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.detail-value {
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 /* ========================================

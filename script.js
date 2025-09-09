@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeCursorTrail();
   initializePersonalStatus();
   
+  // MIND-BLOWING FEATURES - Tree visualization and more!
+  initializeTreeVisualization();
+  
   // Add some personality to the console - now with more insanity!
   console.log('%c👋 Hey there! Thanks for checking out my code!', 'color: #6366f1; font-size: 16px; font-weight: bold;');
   console.log('%c💡 This portfolio is built with vanilla JavaScript, CSS3, and lots of ☕', 'color: #06b6d4; font-size: 14px;');
@@ -895,6 +898,143 @@ function initializePersonalStatus() {
 
 // Initialize personal status
 initializePersonalStatus();
+
+// Tree Data Structure Visualization - MIND-BLOWING!
+function initializeTreeVisualization() {
+  console.log('🌳 Initializing tree data structure visualization...');
+  
+  const skillData = {
+    beginner: {
+      title: 'Coding Journey',
+      description: 'This is where it all began! My passion for coding started with curiosity and has grown into an obsession.',
+      experience: '2+ years',
+      projects: '10+ projects',
+      learning: 'Always learning!'
+    },
+    html: {
+      title: 'HTML5',
+      description: 'The foundation of web development! I love creating semantic, accessible markup that makes the web better.',
+      experience: '2+ years',
+      projects: '15+ websites',
+      learning: 'Mastering accessibility'
+    },
+    css: {
+      title: 'CSS3',
+      description: 'Where creativity meets code! I enjoy crafting beautiful, responsive designs with modern CSS techniques.',
+      experience: '2+ years',
+      projects: '20+ designs',
+      learning: 'Advanced animations'
+    },
+    js: {
+      title: 'JavaScript',
+      description: 'The language that brings websites to life! I love the power and flexibility of modern JavaScript.',
+      experience: '1.5+ years',
+      projects: '12+ apps',
+      learning: 'ES6+ features'
+    },
+    react: {
+      title: 'React',
+      description: 'Component-based architecture is amazing! Building reusable, maintainable UI components is my passion.',
+      experience: '1+ year',
+      projects: '8+ apps',
+      learning: 'Hooks & Context'
+    },
+    python: {
+      title: 'Python',
+      description: 'My favorite language! From web development to AI/ML, Python does it all beautifully.',
+      experience: '2+ years',
+      projects: '25+ scripts',
+      learning: 'Advanced patterns'
+    },
+    node: {
+      title: 'Node.js',
+      description: 'JavaScript everywhere! Building scalable backend services with the language I love.',
+      experience: '1+ year',
+      projects: '5+ APIs',
+      learning: 'Microservices'
+    },
+    ai: {
+      title: 'AI/ML',
+      description: 'The future is here! I\'m fascinated by machine learning and building intelligent systems.',
+      experience: '6+ months',
+      projects: '3+ models',
+      learning: 'Deep learning'
+    },
+    data: {
+      title: 'Data Science',
+      description: 'Finding patterns in data is like solving puzzles! I love the analytical side of programming.',
+      experience: '4+ months',
+      projects: '2+ analyses',
+      learning: 'Statistics'
+    },
+    cloud: {
+      title: 'Cloud',
+      description: 'Deploying applications at scale! Learning about cloud architecture and DevOps practices.',
+      experience: '3+ months',
+      projects: '1+ deployment',
+      learning: 'AWS & Docker'
+    },
+    expert: {
+      title: 'Expert Level',
+      description: 'My ultimate goal! To become a true expert who can build anything and mentor others.',
+      experience: 'Future goal',
+      projects: 'Many more!',
+      learning: 'Never stops!'
+    }
+  };
+
+  // Add click handlers to all tree nodes
+  document.querySelectorAll('.tree-node').forEach(node => {
+    node.addEventListener('click', () => {
+      const skill = node.dataset.skill;
+      const data = skillData[skill];
+      
+      if (data) {
+        // Update info panel
+        document.getElementById('selected-skill-title').textContent = data.title;
+        document.getElementById('selected-skill-description').textContent = data.description;
+        document.getElementById('experience-level').textContent = data.experience;
+        document.getElementById('project-count').textContent = data.projects;
+        document.getElementById('learning-status').textContent = data.learning;
+        
+        // Add visual feedback
+        node.style.animation = 'nodePulse 0.5s ease-in-out';
+        setTimeout(() => {
+          node.style.animation = '';
+        }, 500);
+      }
+    });
+  });
+}
+
+// Initialize tree visualization
+initializeTreeVisualization();
+
+// Theme toggle functionality - MIND-BLOWING!
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  localStorage.setItem('theme', currentTheme);
+  
+  // Update theme toggle icon and text
+  const themeIcon = document.getElementById('themeIcon');
+  const themeText = document.querySelector('.theme-text');
+  
+  if (currentTheme === 'dark') {
+    themeIcon.className = 'fas fa-moon';
+    themeText.textContent = 'Dark';
+  } else {
+    themeIcon.className = 'fas fa-sun';
+    themeText.textContent = 'Light';
+  }
+  
+  // Add a cool animation effect
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.style.animation = 'none';
+  setTimeout(() => {
+    themeToggle.style.animation = 'pulse 0.6s ease-in-out';
+  }, 10);
+}
 
 // Add some insane console commands
 window.portfolio = {
