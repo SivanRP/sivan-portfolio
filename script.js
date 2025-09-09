@@ -8,12 +8,12 @@ let isScrolling = false;
 let currentTheme = 'dark';
 let typingIndex = 0;
 let typingTexts = [
+  'Code Wizard',
+  'Problem-Solving Ninja',
   'AI/ML Developer',
-  'Python Enthusiast', 
-  'Neural Network Architect',
-  'Automation Specialist',
-  'Problem Solver',
-  'Tech Innovator'
+  'Coffee-to-Code Converter',
+  'Tech Innovator',
+  'Future Tech Leader'
 ];
 
 // ========================================
