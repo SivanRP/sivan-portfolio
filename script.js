@@ -111,7 +111,7 @@ function initializeNavigation() {
   const nav = document.querySelector(".glass-nav");
   
   if (hamburgerIcon) {
-    hamburgerIcon.addEventListener("click", toggleMenu);
+  hamburgerIcon.addEventListener("click", toggleMenu);
   }
   
   // Smooth scrolling for navigation links
@@ -578,14 +578,17 @@ document.addEventListener('mousedown', () => {
 // MIND-BLOWING NEW FEATURES - THE STUFF OF LEGENDS
 // ========================================
 
-// Letter Falling Effect - When you hover over letters, they literally fall down!
+// Letter Falling Effect - Only for specific headings, not the main name!
 function initializeLetterFallEffect() {
   console.log('🎭 Initializing letter fall effect...');
   
-  // Find all headings and wrap each letter in a span
-  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  // Only apply to section headings, NOT the main hero name
+  const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
   
   headings.forEach(heading => {
+    // Skip if it's the main hero title
+    if (heading.closest('#profile')) return;
+    
     const text = heading.textContent;
     heading.innerHTML = '';
     

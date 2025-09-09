@@ -186,9 +186,14 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Letter-by-letter falling effect for headings */
-h1:hover, h2:hover, h3:hover {
+/* Letter-by-letter falling effect for headings - but NOT the main hero name */
+h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
   animation: glitch 0.5s ease-in-out;
+}
+
+/* Keep the main hero name clean and simple */
+#profile h1:hover {
+  animation: none;
 }
 
 /* Individual letter styling for the falling effect */
@@ -213,6 +218,19 @@ h1 {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: holographicShimmer 3s ease-in-out infinite;
+}
+
+/* Main hero name should be clean and readable */
+#profile h1 {
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#profile h1 .name-primary,
+#profile h1 .name-accent {
+  display: inline;
+  white-space: nowrap;
 }
 
 h2 { 
