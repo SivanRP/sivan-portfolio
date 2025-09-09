@@ -2524,6 +2524,132 @@ a:hover {
 }
 
 /* ========================================
+   HOBBIES SECTION - The fun stuff!
+   ======================================== */
+
+.hobbies-section {
+  padding: var(--space-20) 0;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.hobbies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.hobby-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.hobby-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-10px) scale(1.02);
+  box-shadow: 
+    var(--shadow-2xl),
+    0 0 30px rgba(99, 102, 241, 0.2),
+    0 0 60px rgba(6, 182, 212, 0.15);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.hobby-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    var(--primary-color), 
+    var(--secondary-color), 
+    var(--accent-color), 
+    var(--primary-color));
+  background-size: 400% 400%;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: -1;
+  animation: holographicShimmer 3s ease-in-out infinite;
+}
+
+.hobby-card:hover::before {
+  opacity: 0.05;
+}
+
+.hobby-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  font-size: 1.5rem;
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.hobby-card:hover .hobby-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.hobby-content h3 {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hobby-content p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-base);
+}
+
+.hobby-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.hobby-tag {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.3s ease;
+}
+
+.hobby-tag:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+}
+
+/* ========================================
    PERSONAL TOUCHES & INNOVATIVE UI
    ======================================== */
 

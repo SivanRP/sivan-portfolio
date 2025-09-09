@@ -651,22 +651,22 @@ function createMatrixColumn(container, index) {
   container.appendChild(column);
 }
 
-// Glitch Effects - Digital distortion madness!
+// Subtle Glitch Effects - Much more refined and less aggressive
 function initializeGlitchEffects() {
-  console.log('⚡ Initializing glitch effects...');
+  console.log('⚡ Initializing subtle glitch effects...');
   
-  // Add glitch effect to random elements
+  // Much more subtle glitch effect - only on hover and very rarely
   setInterval(() => {
-    const elements = document.querySelectorAll('.project-card, .skill-card, .stat-card');
+    const elements = document.querySelectorAll('.project-card, .skill-card');
     const randomElement = elements[Math.floor(Math.random() * elements.length)];
     
-    if (randomElement) {
-      randomElement.style.animation = 'glitch 0.3s ease-in-out';
+    if (randomElement && Math.random() > 0.95) { // Much more rare - only 5% chance
+      randomElement.style.animation = 'glitch 0.2s ease-in-out';
       setTimeout(() => {
         randomElement.style.animation = '';
-      }, 300);
+      }, 200);
     }
-  }, 5000); // Glitch every 5 seconds
+  }, 15000); // Glitch every 15 seconds instead of 5
 }
 
 // Quantum Tunnels - Elements that tunnel through space!
