@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initParticleEffects();
     initInteractiveGlow();
     initClickExplosions();
+    initMindBlowingEffects();
 });
 
 // ========================================
@@ -280,7 +281,7 @@ function initCursorTrail() {
     updateTrail();
 }
 
-// Binary Rain Effect - Fixed
+// Binary Rain Effect - COMPLETELY REWRITTEN
 function initBinaryRain() {
     const binaryContainer = document.createElement('div');
     binaryContainer.className = 'binary-rain';
@@ -297,59 +298,62 @@ function initBinaryRain() {
     document.body.appendChild(binaryContainer);
     
     const binaryChars = '01';
-    const columns = Math.floor(window.innerWidth / 25);
+    const columns = Math.floor(window.innerWidth / 20);
+    const binaryColumns = [];
     
+    // Create columns
     for (let i = 0; i < columns; i++) {
-        createBinaryColumn(i);
-    }
-    
-    function createBinaryColumn(index) {
         const column = document.createElement('div');
         column.className = 'binary-column';
         column.style.cssText = `
             position: absolute;
-            top: -100px;
-            left: ${index * 25}px;
-            width: 25px;
+            top: 0;
+            left: ${i * 20}px;
+            width: 20px;
             height: 100vh;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 14px;
             color: #00ff00;
-            opacity: 0.15;
-            line-height: 1.2;
+            opacity: 0.3;
+            line-height: 1.1;
             will-change: transform;
+            overflow: hidden;
         `;
         
-        let binaryString = '';
-        for (let i = 0; i < 40; i++) {
-            binaryString += binaryChars[Math.floor(Math.random() * binaryChars.length)] + '<br>';
+        binaryContainer.appendChild(column);
+        binaryColumns.push({
+            element: column,
+            position: -Math.random() * 1000,
+            speed: 1 + Math.random() * 3,
+            chars: generateBinaryString(50)
+        });
+    }
+    
+    function generateBinaryString(length) {
+        let str = '';
+        for (let i = 0; i < length; i++) {
+            str += binaryChars[Math.floor(Math.random() * binaryChars.length)] + '<br>';
         }
-        column.innerHTML = binaryString;
-        
-        // Start animation
-        let position = -100;
-        const speed = 0.5 + Math.random() * 1.5;
-        
-        function animate() {
-            position += speed;
-            column.style.transform = `translateY(${position}px)`;
+        return str;
+    }
+    
+    function animateBinaryRain() {
+        binaryColumns.forEach(column => {
+            column.position += column.speed;
             
-            if (position > window.innerHeight + 100) {
-                position = -100;
-                // Regenerate binary string
-                let newBinaryString = '';
-                for (let i = 0; i < 40; i++) {
-                    newBinaryString += binaryChars[Math.floor(Math.random() * binaryChars.length)] + '<br>';
-                }
-                column.innerHTML = newBinaryString;
+            if (column.position > window.innerHeight + 100) {
+                column.position = -100;
+                column.chars = generateBinaryString(50);
             }
             
-            requestAnimationFrame(animate);
-        }
+            column.element.style.transform = `translateY(${column.position}px)`;
+            column.element.innerHTML = column.chars;
+        });
         
-        animate();
-        binaryContainer.appendChild(column);
+        requestAnimationFrame(animateBinaryRain);
     }
+    
+    animateBinaryRain();
 }
 
 // Particle Effects - Optimized
@@ -582,6 +586,247 @@ function initClickExplosions() {
     }
 }
 
+// MIND-BLOWING EFFECTS 🔥
+function initMindBlowingEffects() {
+    // 1. Matrix-style glitch text effect
+    initGlitchText();
+    
+    // 2. Holographic shimmer on hover
+    initHolographicShimmer();
+    
+    // 3. Quantum tunnel effect on scroll
+    initQuantumTunnel();
+    
+    // 4. Neural network pulse
+    initNeuralPulse();
+    
+    // 5. Dimensional shift on click
+    initDimensionalShift();
+    
+    // 6. Liquid morphing background
+    initLiquidMorph();
+    
+    // 7. Data stream effect
+    initDataStream();
+}
+
+// Glitch Text Effect
+function initGlitchText() {
+    const glitchElements = document.querySelectorAll('.hero-title, .section-title');
+    
+    glitchElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.animation = 'glitch 0.3s ease-in-out';
+            this.style.textShadow = `
+                2px 0 #ff0000,
+                -2px 0 #00ffff,
+                0 2px #00ff00,
+                0 -2px #ffff00
+            `;
+            
+            setTimeout(() => {
+                this.style.animation = '';
+                this.style.textShadow = '';
+            }, 300);
+        });
+    });
+}
+
+// Holographic Shimmer
+function initHolographicShimmer() {
+    const shimmerElements = document.querySelectorAll('.work-item, .skill-tag, .btn');
+    
+    shimmerElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.background = `
+                linear-gradient(45deg, 
+                    transparent 30%, 
+                    rgba(0, 255, 0, 0.1) 50%, 
+                    transparent 70%
+                ),
+                linear-gradient(-45deg, 
+                    transparent 30%, 
+                    rgba(0, 255, 255, 0.1) 50%, 
+                    transparent 70%
+                )
+            `;
+            this.style.backgroundSize = '200% 200%';
+            this.style.animation = 'holographicShimmer 1s ease-in-out';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            this.style.background = '';
+            this.style.animation = '';
+        });
+    });
+}
+
+// Quantum Tunnel Effect
+function initQuantumTunnel() {
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        
+        scrollTimeout = setTimeout(() => {
+            createQuantumTunnel();
+        }, 100);
+    });
+    
+    function createQuantumTunnel() {
+        const tunnel = document.createElement('div');
+        tunnel.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, 
+                transparent 0%, 
+                rgba(0, 255, 0, 0.1) 30%, 
+                rgba(0, 255, 255, 0.2) 60%, 
+                transparent 100%
+            );
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transform: translate(-50%, -50%) scale(0);
+            animation: quantumTunnel 2s ease-out forwards;
+        `;
+        
+        document.body.appendChild(tunnel);
+        
+        setTimeout(() => {
+            if (tunnel.parentNode) {
+                tunnel.parentNode.removeChild(tunnel);
+            }
+        }, 2000);
+    }
+}
+
+// Neural Network Pulse
+function initNeuralPulse() {
+    const pulseContainer = document.createElement('div');
+    pulseContainer.className = 'neural-pulse';
+    pulseContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        background: radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+        animation: neuralPulse 4s ease-in-out infinite;
+    `;
+    document.body.appendChild(pulseContainer);
+}
+
+// Dimensional Shift
+function initDimensionalShift() {
+    document.addEventListener('click', function(e) {
+        const shift = document.createElement('div');
+        shift.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0, 255, 0, 0.1) 0%, 
+                rgba(0, 255, 255, 0.1) 25%, 
+                rgba(255, 0, 255, 0.1) 50%, 
+                rgba(255, 255, 0, 0.1) 75%, 
+                rgba(0, 255, 0, 0.1) 100%
+            );
+            pointer-events: none;
+            z-index: 500;
+            animation: dimensionalShift 0.5s ease-out;
+        `;
+        
+        document.body.appendChild(shift);
+        
+        setTimeout(() => {
+            if (shift.parentNode) {
+                shift.parentNode.removeChild(shift);
+            }
+        }, 500);
+    });
+}
+
+// Liquid Morph
+function initLiquidMorph() {
+    const morphContainer = document.createElement('div');
+    morphContainer.className = 'liquid-morph';
+    morphContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        background: 
+            radial-gradient(ellipse at 10% 20%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at 90% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+        animation: liquidMorph 8s ease-in-out infinite;
+    `;
+    document.body.appendChild(morphContainer);
+}
+
+// Data Stream Effect
+function initDataStream() {
+    const dataContainer = document.createElement('div');
+    dataContainer.className = 'data-stream';
+    dataContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+    `;
+    document.body.appendChild(dataContainer);
+    
+    function createDataStream() {
+        const stream = document.createElement('div');
+        const x = Math.random() * window.innerWidth;
+        const speed = 2 + Math.random() * 3;
+        
+        stream.style.cssText = `
+            position: absolute;
+            left: ${x}px;
+            top: -50px;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                #00ff00 50%, 
+                transparent 100%
+            );
+            animation: dataStream ${speed}s linear forwards;
+            box-shadow: 0 0 10px #00ff00;
+        `;
+        
+        dataContainer.appendChild(stream);
+        
+        setTimeout(() => {
+            if (stream.parentNode) {
+                stream.parentNode.removeChild(stream);
+            }
+        }, speed * 1000);
+    }
+    
+    // Create streams periodically
+    setInterval(createDataStream, 200);
+}
+
 // Add CSS animations for the effects
 const style = document.createElement('style');
 style.textContent = `
@@ -607,12 +852,120 @@ style.textContent = `
         }
     }
     
+    @keyframes glitch {
+        0%, 100% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+    }
+    
+    @keyframes holographicShimmer {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
+        100% { background-position: 0% 0%; }
+    }
+    
+    @keyframes quantumTunnel {
+        0% { 
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+        50% { 
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        100% { 
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes neuralPulse {
+        0%, 100% { 
+            opacity: 0.05;
+            transform: scale(1);
+        }
+        50% { 
+            opacity: 0.15;
+            transform: scale(1.1);
+        }
+    }
+    
+    @keyframes dimensionalShift {
+        0% { 
+            opacity: 0;
+            transform: scale(0.8) rotate(0deg);
+        }
+        50% { 
+            opacity: 1;
+            transform: scale(1.1) rotate(180deg);
+        }
+        100% { 
+            opacity: 0;
+            transform: scale(1.2) rotate(360deg);
+        }
+    }
+    
+    @keyframes liquidMorph {
+        0%, 100% { 
+            transform: scale(1) rotate(0deg);
+            filter: hue-rotate(0deg);
+        }
+        25% { 
+            transform: scale(1.1) rotate(90deg);
+            filter: hue-rotate(90deg);
+        }
+        50% { 
+            transform: scale(0.9) rotate(180deg);
+            filter: hue-rotate(180deg);
+        }
+        75% { 
+            transform: scale(1.05) rotate(270deg);
+            filter: hue-rotate(270deg);
+        }
+    }
+    
+    @keyframes dataStream {
+        0% { 
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+        10% { 
+            opacity: 1;
+        }
+        90% { 
+            opacity: 1;
+        }
+        100% { 
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+    
     .cursor-trail {
         transition: all 0.1s ease;
     }
     
     .explosion-hole {
         animation: holeExpand 0.3s ease-out;
+    }
+    
+    /* Enhanced visibility and prominence */
+    .hero-title, .section-title {
+        text-shadow: 
+            0 0 10px #00ff00,
+            0 0 20px #00ff00,
+            0 0 30px #00ff00,
+            0 0 40px #00ff00;
+    }
+    
+    .work-item:hover, .skill-tag:hover, .btn:hover {
+        transform: scale(1.1) !important;
+        box-shadow: 
+            0 0 30px #00ff00,
+            0 0 60px rgba(0, 255, 0, 0.5),
+            0 0 90px rgba(0, 255, 0, 0.3) !important;
     }
     
     /* Performance optimizations */
@@ -626,6 +979,10 @@ style.textContent = `
     
     .particle-container > div {
         will-change: transform, opacity;
+    }
+    
+    .neural-pulse, .liquid-morph, .data-stream {
+        will-change: transform, opacity, filter;
     }
 `;
 document.head.appendChild(style);
