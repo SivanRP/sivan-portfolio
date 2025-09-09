@@ -57,6 +57,40 @@ body::after {
     z-index: -1;
 }
 
+/* Falling Text Animation */
+.falling-text {
+    position: fixed;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.falling-text::before,
+.falling-text::after {
+    content: 'CODE DEVELOPER FULLSTACK FRONTEND BACKEND MACHINE LEARNING REACT NODE PYTHON JAVASCRIPT CSS HTML API DATABASE MONGODB EXPRESS TYPESCRIPT';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #00ff00;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.1;
+    animation: fallingText 15s linear infinite;
+    white-space: nowrap;
+    transform: translateX(-100%);
+}
+
+.falling-text::after {
+    animation-delay: 7.5s;
+    transform: translateX(100%);
+}
+
 /* Performance optimizations */
 img {
     max-width: 100%;
@@ -129,6 +163,69 @@ img {
 @keyframes matrixRain {
     0% { transform: translateY(-100vh); opacity: 1; }
     100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes fallingText {
+    0% { 
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% { 
+        opacity: 1;
+    }
+    90% { 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes smoothFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% { 
+        transform: translateY(-10px) rotate(1deg);
+    }
+}
+
+@keyframes dataFlow {
+    0% { 
+        transform: translateX(-100px) translateY(0px);
+        opacity: 0;
+    }
+    10% { 
+        opacity: 1;
+    }
+    90% { 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateX(100vw) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { 
+        box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+    }
+    50% { 
+        box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+}
+
+@keyframes smoothSlide {
+    0% { 
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% { 
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* ========================================
@@ -321,7 +418,8 @@ img {
         0 0 10px #00ff00,
         0 0 15px #00ff00,
         0 0 20px #00ff00;
-    animation: slideInLeft 0.8s ease-out, neonGlow 2s ease-in-out infinite;
+    animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), neonGlow 3s ease-in-out infinite;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .title-line:nth-child(1) {
@@ -330,6 +428,15 @@ img {
 
 .title-line:nth-child(2) {
     animation-delay: 0.2s, 0.2s;
+}
+
+.title-line:hover {
+    transform: scale(1.05);
+    text-shadow: 
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00ff00,
+        0 0 40px #00ff00;
 }
 
 .hero-subtitle {
@@ -444,11 +551,12 @@ img {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 
         0 0 20px #00ff00,
         0 0 40px rgba(0, 255, 0, 0.3);
-    animation: glitch 0.3s ease-in-out;
+    animation: glitch 0.3s ease-in-out, pulseGlow 1.5s ease-in-out infinite;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .btn-secondary {
@@ -461,10 +569,12 @@ img {
     background: rgba(0, 255, 0, 0.1);
     color: #ffffff;
     text-shadow: 0 0 10px #00ff00;
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 
         0 0 20px #00ff00,
         0 0 40px rgba(0, 255, 0, 0.3);
+    animation: pulseGlow 1.5s ease-in-out infinite;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ========================================
@@ -599,7 +709,9 @@ img {
 .skill-tag:hover {
     background: rgba(0, 255, 0, 0.2);
     box-shadow: 0 0 20px #00ff00;
-    animation: glitch 0.3s ease-in-out;
+    animation: glitch 0.3s ease-in-out, smoothFloat 2s ease-in-out infinite;
+    transform: translateY(-2px) scale(1.05);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .about-stats {
@@ -720,11 +832,12 @@ img {
 }
 
 .work-item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.02);
     box-shadow: 
         0 0 30px #00ff00,
         0 0 60px rgba(0, 255, 0, 0.3);
-    animation: glitch 0.3s ease-in-out;
+    animation: glitch 0.3s ease-in-out, pulseGlow 2s ease-in-out infinite;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .work-image {
@@ -822,7 +935,7 @@ img {
 .contact {
     padding: 6rem 0;
     background: #000000;
-    position: relative;
+  position: relative;
     overflow: hidden;
 }
 
@@ -879,14 +992,14 @@ img {
 }
 
 .contact-links {
-    display: flex;
+  display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
 .contact-link {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
     gap: 1rem;
     text-decoration: none;
     color: #00ff00;
@@ -1096,7 +1209,7 @@ img {
     
     .hero-container {
         grid-template-columns: 1fr;
-        text-align: center;
+  text-align: center;
         gap: 2rem;
     }
     
