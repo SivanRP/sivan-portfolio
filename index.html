@@ -1,835 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Basic HTML5 meta tags - the foundation of any modern website -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivan Pushpagiri - Creative Developer</title>
+    <meta name="description" content="Creative developer passionate about building amazing digital experiences">
     
-    <!-- Page title - this shows up in browser tabs and search results -->
-    <title>Sivan Pushpagiri | AI/ML Developer & Innovator</title>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
     
-    <!-- SEO Meta Tags - helps search engines understand what this page is about -->
-    <!-- I spent time crafting these to make sure my portfolio ranks well for AI/ML developer searches -->
-    <meta name="description" content="Sivan Pushpagiri - Passionate AI/ML Developer, Software Engineer, and Innovator. Building the future with intelligent automation and machine learning solutions." />
-    <meta name="keywords" content="Sivan Pushpagiri, AI Developer, Machine Learning, Software Engineer, Python, React, Portfolio" />
-    <meta name="author" content="Sivan Pushpagiri" />
-    
-    <!-- Open Graph Meta Tags - makes the site look great when shared on social media -->
-    <!-- These tags control how the link preview appears on LinkedIn, Twitter, etc. -->
-    <meta property="og:title" content="Sivan Pushpagiri | AI/ML Developer & Innovator" />
-    <meta property="og:description" content="Passionate AI/ML Developer building intelligent solutions for the future" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sivanpushpagiri.dev" />
-    
-    <!-- Favicon - the little icon that appears in browser tabs -->
-    <!-- Using my profile picture as the favicon for brand consistency -->
-    <link rel="icon" type="image/png" href="./assets/profile-pic.png" />
-    
-    <!-- Google Fonts - loading Inter for clean typography and JetBrains Mono for code snippets -->
-    <!-- Preconnecting to Google Fonts for better performance -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome - for all those beautiful icons throughout the site -->
-    <!-- Using version 6.4.0 for the latest icons and best performance -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
     
-    <!-- AOS (Animate On Scroll) Library - adds smooth animations when elements come into view -->
-    <!-- This makes the site feel more dynamic and engaging -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Custom Stylesheets - where all the magic happens -->
-    <!-- style.css contains all the main styles, mediaqueries.css handles responsive design -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-  </head>
-  <body>
-    <!-- Animated Background - creates a dynamic, engaging backdrop -->
-    <!-- These floating shapes add visual interest without being distracting -->
-    <div class="animated-bg">
-      <div class="floating-shapes">
-        <!-- Each shape has different sizes and animation delays for natural movement -->
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="shape shape-4"></div>
-        <div class="shape shape-5"></div>
-      </div>
-    </div>
-
-    <!-- Personal Status Indicator - Shows my current mood/status -->
-    <!-- This is a fun little touch that shows my personality -->
-    <div class="personal-status">
-      <span class="status-emoji">🚀</span>
-      <span class="status-text">Building the future</span>
-    </div>
-
-    <!-- Floating Code Snippets - Shows my coding personality -->
-    <!-- These are snippets of code that float around, showing what I work with -->
-    <div class="floating-code">const innovation = true;</div>
-    <div class="floating-code">if (creativity) { build(); }</div>
-    <div class="floating-code">while (learning) { grow(); }</div>
-
-    <!-- Innovation Indicator - Shows my creative process -->
-    <!-- This shows how my brain is constantly working on new ideas -->
-    <div class="innovation-indicator">
-      <div class="innovation-title">Creative Process</div>
-      <div class="innovation-progress">
-        <div class="innovation-bar"></div>
-      </div>
-    </div>
-
-    <!-- Custom Cursor Follower - adds a modern, interactive feel -->
-    <!-- This creates a smooth following cursor effect that's popular in modern web design -->
-    <div class="cursor-follower"></div>
-
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+</head>
+<body>
     <!-- Navigation -->
-    <nav id="desktop-nav" class="glass-nav">
-      <div class="nav-container">
-        <div class="logo" data-aos="fade-right">
-          <span class="logo-text">Sivan</span>
-          <span class="logo-accent">Pushpagiri</span>
-        </div>
-        <div class="nav-links-container">
-        <ul class="nav-links">
-            <li><a href="#about" class="nav-link" data-text="About">About</a></li>
-            <li><a href="#hobbies" class="nav-link" data-text="Hobbies">Hobbies</a></li>
-            <li><a href="#experience" class="nav-link" data-text="Experience">Experience</a></li>
-            <li><a href="#projects" class="nav-link" data-text="Projects">Projects</a></li>
-            <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
-        </ul>
-        </div>
-        <div class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
-          <i class="fas fa-moon" id="themeIcon"></i>
-          <span class="theme-text">Dark</span>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Mobile Navigation -->
-    <nav id="hamburger-nav" class="mobile-nav">
-      <div class="mobile-nav-container">
-        <div class="logo" data-aos="fade-right">
-          <span class="logo-text">Sivan</span>
-          <span class="logo-accent">Pushpagiri</span>
-        </div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-            <li><a href="#about" onclick="toggleMenu()" class="mobile-nav-link">About</a></li>
-            <li><a href="#hobbies" onclick="toggleMenu()" class="mobile-nav-link">Hobbies</a></li>
-            <li><a href="#experience" onclick="toggleMenu()" class="mobile-nav-link">Experience</a></li>
-            <li><a href="#projects" onclick="toggleMenu()" class="mobile-nav-link">Projects</a></li>
-            <li><a href="#contact" onclick="toggleMenu()" class="mobile-nav-link">Contact</a></li>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!-- Hero Section - The main attraction! -->
-    <!-- I spent way too much time on this section but it's so worth it -->
-    <section id="profile" class="hero-section">
-      <div class="hero-container">
-        <!-- Profile Image with Glow Effect -->
-        <!-- This glow effect took me 3 hours to get right, but look how cool it is! -->
-        <div class="section__pic-container" data-aos="fade-right" data-aos-delay="200">
-          <div class="profile-image-wrapper">
-            <!-- The glow effect that makes me look like I'm from the future -->
-            <div class="profile-glow"></div>
-            <img src="./assets/profile-pic.png" alt="Sivan Pushpagiri profile picture" class="profile-image" />
-            <div class="profile-overlay">
-              <div class="status-indicator">
-                <!-- This little dot pulses like a heartbeat - so satisfying! -->
-                <span class="status-dot"></span>
-                <span class="status-text">Available for work</span>
-              </div>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Sivan</span>
             </div>
-          </div>
-      </div>
-
-        <!-- Hero Text Content -->
-        <!-- This is where the magic happens - the typing animation is my favorite part! -->
-        <div class="section__text" data-aos="fade-left" data-aos-delay="400">
-          <div class="greeting">
-            <!-- The wave emoji that bounces - I love this little detail -->
-            <span class="wave">👋</span>
-        <p class="section__text__p1">Hey there! I'm</p>
-          </div>
-          
-          <!-- My name with gradient text - looks so professional! -->
-          <h1 class="title">
-            <span class="name-primary">Sivan</span>
-            <span class="name-accent">Pushpagiri</span>
-          </h1>
-          
-          <!-- The typing animation - this took me forever to get right -->
-          <!-- But now it cycles through different roles and looks amazing! -->
-          <div class="typing-container">
-            <p class="section__text__p2">
-              I'm a 
-              <span class="typing-text" id="typing-text"></span>
-              <span class="typing-cursor">|</span>
-            </p>
-          </div>
-
-          <!-- Skills Tags -->
-          <div class="skills-tags" data-aos="fade-up" data-aos-delay="600">
-            <span class="skill-tag">AI/ML</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Neural Networks</span>
-            <span class="skill-tag">Automation</span>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="btn-container" data-aos="fade-up" data-aos-delay="800">
-            <button class="btn btn-primary" onclick="window.open('./assets/resume-example.pdf')">
-              <i class="fas fa-download"></i>
-              <span>Download CV</span>
-              <div class="btn-shine"></div>
-          </button>
-            <button class="btn btn-secondary" onclick="location.href='./#contact'">
-              <i class="fas fa-envelope"></i>
-              <span>Let's Connect</span>
-              <div class="btn-shine"></div>
-          </button>
-          </div>
-
-          <!-- Social Links -->
-          <div id="socials-container" data-aos="fade-up" data-aos-delay="1000">
-            <a href="https://linkedin.com/in/sivanreddypushpagiri/" target="_blank" class="social-link" aria-label="LinkedIn">
-              <i class="fab fa-linkedin-in"></i>
-              <span class="social-tooltip">LinkedIn</span>
-            </a>
-            <a href="https://github.com/SivanRP" target="_blank" class="social-link" aria-label="GitHub">
-              <i class="fab fa-github"></i>
-              <span class="social-tooltip">GitHub</span>
-            </a>
-            <a href="mailto:sivanrp515@gmail.com" class="social-link" aria-label="Email">
-              <i class="fas fa-envelope"></i>
-              <span class="social-tooltip">Email</span>
-            </a>
-            <a href="https://twitter.com/sivanpushpagiri" target="_blank" class="social-link" aria-label="Twitter">
-              <i class="fab fa-twitter"></i>
-              <span class="social-tooltip">Twitter</span>
-            </a>
-          </div>
-
-          <!-- Scroll Indicator -->
-          <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="1200">
-            <div class="scroll-arrow" onclick="scrollToSection('about')">
-              <i class="fas fa-chevron-down"></i>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <span class="scroll-text">Scroll to explore</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Floating Elements -->
-      <div class="floating-elements">
-        <div class="floating-icon" style="--delay: 0s;">
-          <i class="fab fa-python"></i>
-        </div>
-        <div class="floating-icon" style="--delay: 1s;">
-          <i class="fab fa-react"></i>
-        </div>
-        <div class="floating-icon" style="--delay: 2s;">
-          <i class="fas fa-brain"></i>
-        </div>
-        <div class="floating-icon" style="--delay: 3s;">
-          <i class="fas fa-robot"></i>
-        </div>
-      </div>
-    </section>
-    <!-- About Section -->
-    <section id="about" class="about-section">
-      <div class="section-header" data-aos="fade-up">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-        <div class="title-underline"></div>
-      </div>
-
-      <div class="about-container">
-        <!-- Profile Image - Single, Modern Look -->
-        <div class="about-image-container" data-aos="fade-right" data-aos-delay="200">
-          <div class="image-wrapper">
-            <img src="./assets/profile-pic.png" alt="Sivan Pushpagiri - The Code Wizard" class="about-pic" />
-            <div class="image-overlay">
-              <div class="overlay-content">
-                <i class="fas fa-magic"></i>
-                <span>Code Wizard</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- About Content -->
-        <div class="about-content" data-aos="fade-left" data-aos-delay="400">
-          <!-- Stats Cards -->
-          <div class="stats-container">
-            <div class="stat-card" data-aos="zoom-in" data-aos-delay="600">
-              <div class="stat-icon">
-                <i class="fas fa-briefcase"></i>
-              </div>
-              <div class="stat-content">
-              <h3>Experience</h3>
-                <p class="stat-number">2+</p>
-                <p class="stat-label">Years Software Engineering</p>
-              </div>
-            </div>
-            
-            <div class="stat-card" data-aos="zoom-in" data-aos-delay="700">
-              <div class="stat-icon">
-                <i class="fas fa-graduation-cap"></i>
-              </div>
-              <div class="stat-content">
-              <h3>Education</h3>
-                <p class="stat-number">B.Sc.</p>
-                <p class="stat-label">University of Florida</p>
-              </div>
-            </div>
-
-            <div class="stat-card" data-aos="zoom-in" data-aos-delay="800">
-              <div class="stat-icon">
-                <i class="fas fa-project-diagram"></i>
-              </div>
-              <div class="stat-content">
-                <h3>Projects</h3>
-                <p class="stat-number">10+</p>
-                <p class="stat-label">Completed Projects</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- About Text - Punchy & Charismatic -->
-          <div class="about-text-container" data-aos="fade-up" data-aos-delay="900">
-            <div class="text-wrapper">
-              <h3>Code Wizard & Problem-Solving Ninja! ⚡</h3>
-              <p>
-                What's up! I'm Sivan - a coding addict who turns caffeine into clean code 
-                and impossible ideas into reality. Started as a curious newbie, now I'm 
-                building everything from web apps to AI that actually works!
-              </p>
-              <p>
-                I live for those "EUREKA!" moments when code finally clicks. Debugging is 
-                my meditation, and clean code is my religion. Every bug is just a feature 
-                in disguise, right? 😄 Ready to build the future, one line of code at a time!
-              </p>
-              
-              <!-- Tech Stack -->
-              <div class="tech-stack">
-                <h4>Technologies I Love</h4>
-                <div class="tech-tags">
-                  <span class="tech-tag python">Python</span>
-                  <span class="tech-tag react">React</span>
-                  <span class="tech-tag ai">Machine Learning</span>
-                  <span class="tech-tag neural">Neural Networks</span>
-                  <span class="tech-tag flask">Flask</span>
-                  <span class="tech-tag git">Git</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scroll Arrow -->
-      <div class="scroll-arrow-container" data-aos="fade-up" data-aos-delay="1000">
-        <div class="scroll-arrow" onclick="scrollToSection('experience')">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <span class="scroll-text">My Experience</span>
-      </div>
-    </section>
-    <!-- Hobbies Section - The fun stuff! -->
-    <section id="hobbies" class="hobbies-section">
-      <div class="section-header" data-aos="fade-up">
-        <p class="section__text__p1">What I Love Doing</p>
-        <h1 class="title">Hobbies & Interests</h1>
-        <div class="title-underline"></div>
-      </div>
-
-      <div class="hobbies-container">
-        <!-- Movie Addict Card -->
-        <div class="hobby-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="hobby-icon">
-            <i class="fas fa-film"></i>
-          </div>
-          <div class="hobby-content">
-            <h3>Movie Addict 🎬</h3>
-            <p>
-              I'm a huge movie addict! Recently got into horror movies like Smile 2 - 
-              I love the thrill and the storytelling. From blockbusters to indie films, 
-              I'm always looking for the next great movie to watch.
-            </p>
-            <div class="hobby-tags">
-              <span class="hobby-tag">Horror</span>
-              <span class="hobby-tag">Thriller</span>
-              <span class="hobby-tag">Sci-Fi</span>
-              <span class="hobby-tag">Drama</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chess Player Card -->
-        <div class="hobby-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="hobby-icon">
-            <i class="fas fa-chess"></i>
-          </div>
-          <div class="hobby-content">
-            <h3>Chess Strategist ♟️</h3>
-            <p>
-              I love playing chess! It's like coding for the mind - every move matters, 
-              you have to think strategically, and there's always something new to learn. 
-              It's the perfect game for someone who loves problem-solving.
-            </p>
-            <div class="hobby-tags">
-              <span class="hobby-tag">Strategy</span>
-              <span class="hobby-tag">Problem Solving</span>
-              <span class="hobby-tag">Online</span>
-              <span class="hobby-tag">Tournaments</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cooking Passion Card -->
-        <div class="hobby-card" data-aos="fade-up" data-aos-delay="600">
-          <div class="hobby-icon">
-            <i class="fas fa-utensils"></i>
-          </div>
-          <div class="hobby-content">
-            <h3>Culinary Artist 👨‍🍳</h3>
-            <p>
-              I love cooking! It's like debugging code - you follow a recipe (algorithm), 
-              troubleshoot when things go wrong, and the end result is always satisfying. 
-              Plus, you get to eat your mistakes!
-            </p>
-            <div class="hobby-tags">
-              <span class="hobby-tag">Experimenting</span>
-              <span class="hobby-tag">New Recipes</span>
-              <span class="hobby-tag">International</span>
-              <span class="hobby-tag">Baking</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section - Now with TREE DATA STRUCTURE! -->
-    <section id="experience" class="experience-section">
-      <div class="section-header" data-aos="fade-up">
-        <p class="section__text__p1">Explore My</p>
-        <h1 class="title">Experience & Skills</h1>
-        <div class="title-underline"></div>
-      </div>
-
-      <!-- Clean & Organized Experience Section -->
-      <div class="experience-container">
-        <!-- Frontend Skills -->
-        <div class="skill-category" data-aos="fade-right" data-aos-delay="200">
-          <div class="category-header">
-            <div class="category-icon">
-              <i class="fas fa-laptop-code"></i>
-            </div>
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <p class="category-description">Creating beautiful and responsive user interfaces</p>
-          </div>
-          
-          <div class="skills-grid">
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
-              <div class="skill-icon">
-                <i class="fab fa-html5"></i>
-              </div>
-              <div class="skill-content">
-                <h3>HTML5</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="95"></div>
-                  </div>
-                  <span class="skill-percentage">95%</span>
-                </div>
-                <p>Semantic markup & accessibility</p>
-              </div>
-            </div>
-
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
-              <div class="skill-icon">
-                <i class="fab fa-css3-alt"></i>
-              </div>
-              <div class="skill-content">
-                <h3>CSS3</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="90"></div>
-                  </div>
-                  <span class="skill-percentage">90%</span>
-                </div>
-                <p>Advanced styling & animations</p>
-              </div>
-            </div>
-
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="500">
-              <div class="skill-icon">
-                <i class="fab fa-js-square"></i>
-              </div>
-              <div class="skill-content">
-                <h3>JavaScript</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="85"></div>
-                  </div>
-                  <span class="skill-percentage">85%</span>
-                </div>
-                <p>ES6+ & modern frameworks</p>
-              </div>
-            </div>
-
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="600">
-              <div class="skill-icon">
-                <i class="fab fa-react"></i>
-              </div>
-              <div class="skill-content">
-                <h3>React</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="80"></div>
-                  </div>
-                  <span class="skill-percentage">80%</span>
-                </div>
-                <p>Component-based architecture</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Backend Skills -->
-        <div class="skill-category" data-aos="fade-left" data-aos-delay="200">
-          <div class="category-header">
-            <div class="category-icon">
-              <i class="fas fa-server"></i>
-            </div>
-            <h2 class="experience-sub-title">Backend & AI/ML</h2>
-            <p class="category-description">Building intelligent systems and robust backends</p>
-          </div>
-          
-          <div class="skills-grid">
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
-              <div class="skill-icon">
-                <i class="fab fa-python"></i>
-              </div>
-              <div class="skill-content">
-                <h3>Python</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="95"></div>
-                  </div>
-                  <span class="skill-percentage">95%</span>
-                </div>
-                <p>Advanced programming & data science</p>
-              </div>
-            </div>
-
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
-              <div class="skill-icon">
-                <i class="fas fa-brain"></i>
-              </div>
-              <div class="skill-content">
-                <h3>Machine Learning</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="85"></div>
-                  </div>
-                  <span class="skill-percentage">85%</span>
-                </div>
-                <p>Neural networks & deep learning</p>
-              </div>
-            </div>
-
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="500">
-              <div class="skill-icon">
-                <i class="fas fa-project-diagram"></i>
-              </div>
-              <div class="skill-content">
-                <h3>Neural Networks</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="80"></div>
-                  </div>
-                  <span class="skill-percentage">80%</span>
-                </div>
-                <p>Deep learning architectures</p>
-              </div>
-            </div>
-
-            <div class="skill-card" data-aos="zoom-in" data-aos-delay="600">
-              <div class="skill-icon">
-                <i class="fas fa-flask"></i>
-              </div>
-              <div class="skill-content">
-                <h3>Flask</h3>
-                <div class="skill-level">
-                  <div class="skill-bar">
-                    <div class="skill-progress" data-width="75"></div>
-                  </div>
-                  <span class="skill-percentage">75%</span>
-                </div>
-                <p>Lightweight web framework</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Scroll Arrow -->
-      <div class="scroll-arrow-container" data-aos="fade-up" data-aos-delay="1000">
-        <div class="scroll-arrow" onclick="scrollToSection('projects')">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <span class="scroll-text">My Projects</span>
-      </div>
-    </section>
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-      <div class="section-header" data-aos="fade-up">
-      <p class="section__text__p1">Browse My Recent</p>
-        <h1 class="title">Featured Projects</h1>
-        <div class="title-underline"></div>
-      </div>
-
-      <div class="projects-container">
-        <!-- Project 1: Image Style Transfer -->
-        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="project-image">
-            <img src="./assets/project-1.png" alt="Image Style Transfer Project" />
-            <div class="project-overlay">
-              <div class="project-links">
-                <a href="#" class="project-link" title="View Live Demo">
-                  <i class="fas fa-external-link-alt"></i>
-                </a>
-                <a href="#" class="project-link" title="View Source Code">
-                  <i class="fab fa-github"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="project-content">
-            <h3>Image Style Transfer</h3>
-            <p>
-              A neural network application that transfers artistic styles between images using deep learning. 
-              Built with Python, TensorFlow, and OpenCV. This project combines computer vision with 
-              artistic creativity!
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">TensorFlow</span>
-              <span class="tech-tag">OpenCV</span>
-              <span class="tech-tag">Neural Networks</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2: E-Commerce Platform -->
-        <div class="project-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="project-image">
-            <img src="./assets/project-2.png" alt="E-Commerce Platform Project" />
-            <div class="project-overlay">
-              <div class="project-links">
-                <a href="#" class="project-link" title="View Live Demo">
-                  <i class="fas fa-external-link-alt"></i>
-                </a>
-                <a href="#" class="project-link" title="View Source Code">
-                  <i class="fab fa-github"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="project-content">
-            <h3>E-Commerce Platform</h3>
-            <p>
-              A full-stack e-commerce solution with user authentication, payment processing, and admin dashboard. 
-              Features include product management, order tracking, and real-time notifications. Built with modern web technologies!
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">MongoDB</span>
-              <span class="tech-tag">Stripe API</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3: AI Chatbot -->
-        <div class="project-card" data-aos="fade-up" data-aos-delay="600">
-          <div class="project-image">
-            <img src="./assets/project-3.png" alt="AI Chatbot Project" />
-            <div class="project-overlay">
-              <div class="project-links">
-                <a href="#" class="project-link" title="View Live Demo">
-                  <i class="fas fa-external-link-alt"></i>
-                </a>
-                <a href="#" class="project-link" title="View Source Code">
-                  <i class="fab fa-github"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="project-content">
-            <h3>AI Chatbot Assistant</h3>
-            <p>
-              An intelligent chatbot powered by natural language processing and machine learning. 
-              Capable of understanding context, answering questions, and providing helpful responses. 
-              The future of customer service!
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">NLTK</span>
-              <span class="tech-tag">Flask</span>
-              <span class="tech-tag">Machine Learning</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scroll Arrow -->
-      <div class="scroll-arrow-container" data-aos="fade-up" data-aos-delay="1000">
-        <div class="scroll-arrow" onclick="scrollToSection('contact')">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <span class="scroll-text">Get In Touch</span>
-      </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-      <div class="section-header" data-aos="fade-up">
-        <p class="section__text__p1">Get In Touch</p>
-        <h1 class="title">Contact Me</h1>
-        <div class="title-underline"></div>
-      </div>
-
-      <div class="contact-container">
-        <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
-          <div class="contact-item">
-            <div class="contact-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <div class="contact-details">
-              <h3>Email</h3>
-              <p>sivanreddypushpagiri@gmail.com</p>
-            </div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-icon">
-              <i class="fas fa-phone"></i>
-            </div>
-            <div class="contact-details">
-              <h3>Phone</h3>
-              <p>+1 (555) 123-4567</p>
-            </div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-icon">
-              <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <div class="contact-details">
-              <h3>Location</h3>
-              <p>Gainesville, Florida</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-form" data-aos="fade-left" data-aos-delay="400">
-          <form id="contactForm">
-            <div class="form-group">
-              <input type="text" id="name" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" id="email" name="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-              <input type="text" id="subject" name="subject" placeholder="Subject" required>
-            </div>
-            <div class="form-group">
-              <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-paper-plane"></i>
-              <span>Send Message</span>
-              <div class="btn-shine"></div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
-          </form>
         </div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Creative</span>
+                    <span class="title-line">Developer</span>
+                </h1>
+                <p class="hero-subtitle">Building digital experiences that matter</p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <img src="assets/profile-pic.png" alt="Sivan Pushpagiri" loading="eager">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate about creating digital magic</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Hey there! I'm Sivan 👋</h3>
+                    <p>I'm a creative developer who loves turning ideas into reality through code. I believe in the power of clean, efficient code and beautiful user experiences.</p>
+                    <p>When I'm not coding, you'll find me exploring new technologies, playing chess, or experimenting in the kitchen. I'm always learning and growing!</p>
+                    <div class="skills">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2+</div>
+                        <div class="stat-label">Years</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Passion</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Work</h2>
+                <p class="section-subtitle">Some projects I'm proud of</p>
+            </div>
+            <div class="work-grid">
+                <div class="work-item">
+                    <div class="work-image">
+                        <img src="assets/project-1.png" alt="Project 1" loading="lazy">
+                    </div>
+                    <div class="work-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>Full-stack e-commerce solution with React and Node.js</p>
+                        <div class="work-tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <div class="work-image">
+                        <img src="assets/project-2.png" alt="Project 2" loading="lazy">
+                    </div>
+                    <div class="work-content">
+                        <h3>AI Chatbot</h3>
+                        <p>Intelligent chatbot using machine learning algorithms</p>
+                        <div class="work-tech">
+                            <span>Python</span>
+                            <span>TensorFlow</span>
+                            <span>Flask</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <div class="work-image">
+                        <img src="assets/project-3.png" alt="Project 3" loading="lazy">
+                    </div>
+                    <div class="work-content">
+                        <h3>Portfolio Website</h3>
+                        <p>Modern, responsive portfolio with smooth animations</p>
+                        <div class="work-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Ready to work together?</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in touch</h3>
+                    <p>I'm always excited to hear about new opportunities and interesting projects!</p>
+                    <div class="contact-links">
+                        <a href="mailto:sivan@example.com" class="contact-link">
+                            <span class="contact-icon">📧</span>
+                            sivan@example.com
+                        </a>
+                        <a href="https://github.com/sivan" class="contact-link">
+                            <span class="contact-icon">🐙</span>
+                            GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/sivan" class="contact-link">
+                            <span class="contact-icon">💼</span>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-content">
-          <div class="footer-brand" data-aos="fade-right">
-            <h3>Sivan Pushpagiri</h3>
-            <p>Building the future with AI and machine learning</p>
-            <div class="footer-social">
-              <a href="https://github.com/sivanreddypushpagiri" class="social-link" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="https://linkedin.com/in/sivanreddypushpagiri/" class="social-link" target="_blank" rel="noopener">
-                <i class="fab fa-linkedin"></i>
-              </a>
-              <a href="https://twitter.com/sivanreddypushpagiri" class="social-link" target="_blank" rel="noopener">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </div>
-          </div>
-          
-          <div class="footer-links" data-aos="fade-up">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#about">About</a></li>
-              <li><a href="#experience">Experience</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-          
-          <div class="footer-skills" data-aos="fade-up" data-aos-delay="100">
-            <h4>Skills</h4>
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">AI/ML</span>
-            </div>
-          </div>
-          
-          <div class="footer-contact" data-aos="fade-left">
-            <h4>Get In Touch</h4>
-            <p>sivanreddypushpagiri@gmail.com</p>
-            <p>Gainesville, Florida</p>
-          </div>
-        </div>
-        
-        <div class="footer-bottom">
-          <div class="footer-bottom-content">
+        <div class="container">
             <p>&copy; 2024 Sivan Pushpagiri. All rights reserved.</p>
-            <p>Built with ❤️ and lots of ☕</p>
-          </div>
         </div>
-      </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
-      <i class="fas fa-chevron-up"></i>
-    </button>
-
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
