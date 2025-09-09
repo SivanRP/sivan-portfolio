@@ -967,6 +967,30 @@ img {
     animation: glitch 0.2s ease-in-out;
 }
 
+.work-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.work-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.work-link:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 10px #00ff00;
+    transform: translateY(-2px);
+}
+
 /* ========================================
    CONTACT SECTION - HACKER TERMINAL 🔥
    ======================================== */

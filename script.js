@@ -290,7 +290,7 @@ function initCursorTrail() {
     };
 }
 
-// Matrix Code Rain - WORKING VERSION
+// Matrix Code Rain - ULTRA OPTIMIZED
 function initBinaryRain() {
     const matrixContainer = document.createElement('div');
     matrixContainer.className = 'matrix-rain';
@@ -303,64 +303,73 @@ function initBinaryRain() {
         pointer-events: none;
         z-index: -1;
         overflow: hidden;
-        background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.1) 50%, transparent 100%);
+        background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.05) 50%, transparent 100%);
     `;
     document.body.appendChild(matrixContainer);
     
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
     const drops = [];
-    const fontSize = 14;
+    const fontSize = 16;
     const columns = Math.floor(window.innerWidth / fontSize);
+    const maxSpans = 50; // Limit DOM elements
     
     // Initialize drops
     for (let i = 0; i < columns; i++) {
-        drops[i] = Math.random() * 100;
+        drops[i] = Math.random() * 50;
     }
     
     function drawMatrix() {
-        // Clear canvas effect with semi-transparent black
-        matrixContainer.style.background = 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%)';
+        // Clear old spans if too many
+        const spans = matrixContainer.querySelectorAll('span');
+        if (spans.length > maxSpans) {
+            for (let i = 0; i < spans.length - maxSpans; i++) {
+                spans[i].remove();
+            }
+        }
         
         for (let i = 0; i < drops.length; i++) {
-            const char = chars[Math.floor(Math.random() * chars.length)];
-            const x = i * fontSize;
-            const y = drops[i] * fontSize;
-            
-            const span = document.createElement('span');
-            span.textContent = char;
-            span.style.cssText = `
-                position: absolute;
-                left: ${x}px;
-                top: ${y}px;
-                color: #00ff00;
-                font-family: 'JetBrains Mono', monospace;
-                font-size: ${fontSize}px;
-                opacity: ${Math.random() * 0.5 + 0.3};
-                text-shadow: 0 0 5px #00ff00;
-            `;
-            
-            matrixContainer.appendChild(span);
-            
-            // Remove after animation
-            setTimeout(() => {
-                if (span.parentNode) {
-                    span.parentNode.removeChild(span);
-                }
-            }, 100);
+            if (Math.random() > 0.7) { // Reduce frequency
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+                
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.cssText = `
+                    position: absolute;
+                    left: ${x}px;
+                    top: ${y}px;
+                    color: #00ff00;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: ${fontSize}px;
+                    opacity: ${Math.random() * 0.3 + 0.2};
+                    text-shadow: 0 0 3px #00ff00;
+                    will-change: transform;
+                `;
+                
+                matrixContainer.appendChild(span);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (span.parentNode) {
+                        span.parentNode.removeChild(span);
+                    }
+                }, 200);
+            }
             
             // Reset drop
-            if (drops[i] * fontSize > window.innerHeight && Math.random() > 0.975) {
+            if (drops[i] * fontSize > window.innerHeight && Math.random() > 0.98) {
                 drops[i] = 0;
             }
             
-            drops[i]++;
+            drops[i] += 0.5; // Slower movement
         }
     }
     
-    // Throttled animation
+    // Much more throttled animation
     let lastTime = 0;
     function animateMatrix(currentTime) {
-        if (currentTime - lastTime > 50) { // 20fps for performance
+        if (currentTime - lastTime > 100) { // 10fps for performance
             drawMatrix();
             lastTime = currentTime;
         }
