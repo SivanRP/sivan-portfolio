@@ -17,13 +17,13 @@ let typingTexts = [
 ];
 
 // ========================================
-// INITIALIZATION
+// INITIALIZATION - THE STUFF OF LEGENDS
 // ========================================
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log('🚀 Portfolio initialized successfully!');
   
-  // Initialize all features
+  // Initialize all features - now with MIND-BLOWING effects!
   initializeAnimations();
   initializeNavigation();
   initializeTypingAnimation();
@@ -35,10 +35,26 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeBackToTop();
   initializeParticleEffects();
   
-  // Add some personality to the console
+  // NEW INSANE FEATURES - These will blow minds!
+  initializeLetterFallEffect();
+  initializeMatrixRain();
+  initializeGlitchEffects();
+  initializeQuantumTunnels();
+  initializeNeuralNetworkPulse();
+  initializeDimensionalShifts();
+  initializeLiquidMorphing();
+  initializeHolographicEffects();
+  
+  // PERSONAL TOUCHES - Adding personality and smoothness!
+  initializeCursorTrail();
+  initializePersonalStatus();
+  
+  // Add some personality to the console - now with more insanity!
   console.log('%c👋 Hey there! Thanks for checking out my code!', 'color: #6366f1; font-size: 16px; font-weight: bold;');
   console.log('%c💡 This portfolio is built with vanilla JavaScript, CSS3, and lots of ☕', 'color: #06b6d4; font-size: 14px;');
   console.log('%c🔗 Connect with me: https://linkedin.com/in/sivanreddypushpagiri/', 'color: #10b981; font-size: 12px;');
+  console.log('%c🌟 You just witnessed the power of pure creativity!', 'color: #f59e0b; font-size: 14px; font-weight: bold;');
+  console.log('%c⚡ Try hovering over letters, clicking buttons, and scrolling!', 'color: #ef4444; font-size: 12px;');
 });
 
 // ========================================
@@ -558,4 +574,361 @@ document.addEventListener('mousedown', () => {
   document.body.classList.remove('keyboard-navigation');
 });
 
-console.log('✨ All systems initialized! Portfolio is ready to impress! 🚀');
+// ========================================
+// MIND-BLOWING NEW FEATURES - THE STUFF OF LEGENDS
+// ========================================
+
+// Letter Falling Effect - When you hover over letters, they literally fall down!
+function initializeLetterFallEffect() {
+  console.log('🎭 Initializing letter fall effect...');
+  
+  // Find all headings and wrap each letter in a span
+  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  
+  headings.forEach(heading => {
+    const text = heading.textContent;
+    heading.innerHTML = '';
+    
+    // Split text into individual characters and wrap each in a span
+    text.split('').forEach((char, index) => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char; // Non-breaking space for spaces
+      span.className = 'letter-fall';
+      span.style.animationDelay = `${index * 0.05}s`; // Stagger the animation
+      heading.appendChild(span);
+    });
+  });
+  
+  // Add click effect to letters
+  document.querySelectorAll('.letter-fall').forEach(letter => {
+    letter.addEventListener('click', () => {
+      letter.style.animation = 'letterFall 0.6s ease-in-out forwards';
+      setTimeout(() => {
+        letter.style.animation = '';
+      }, 600);
+    });
+  });
+}
+
+// Matrix Rain Effect - Like the Matrix but cooler!
+function initializeMatrixRain() {
+  console.log('🌧️ Initializing matrix rain effect...');
+  
+  const matrixContainer = document.createElement('div');
+  matrixContainer.className = 'matrix-rain';
+  matrixContainer.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  `;
+  
+  document.body.appendChild(matrixContainer);
+  
+  // Create matrix rain columns
+  for (let i = 0; i < 50; i++) {
+    createMatrixColumn(matrixContainer, i);
+  }
+}
+
+function createMatrixColumn(container, index) {
+  const column = document.createElement('div');
+  column.style.cssText = `
+    position: absolute;
+    top: -100px;
+    left: ${index * 2}%;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, #00ff00, transparent);
+    animation: matrixRain ${3 + Math.random() * 4}s linear infinite;
+    animation-delay: ${Math.random() * 2}s;
+  `;
+  
+  container.appendChild(column);
+}
+
+// Glitch Effects - Digital distortion madness!
+function initializeGlitchEffects() {
+  console.log('⚡ Initializing glitch effects...');
+  
+  // Add glitch effect to random elements
+  setInterval(() => {
+    const elements = document.querySelectorAll('.project-card, .skill-card, .stat-card');
+    const randomElement = elements[Math.floor(Math.random() * elements.length)];
+    
+    if (randomElement) {
+      randomElement.style.animation = 'glitch 0.3s ease-in-out';
+      setTimeout(() => {
+        randomElement.style.animation = '';
+      }, 300);
+    }
+  }, 5000); // Glitch every 5 seconds
+}
+
+// Quantum Tunnels - Elements that tunnel through space!
+function initializeQuantumTunnels() {
+  console.log('🌀 Initializing quantum tunnels...');
+  
+  // Add quantum tunnel effect to buttons
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      btn.style.animation = 'quantumTunnel 0.8s ease-in-out';
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+      btn.style.animation = '';
+    });
+  });
+}
+
+// Neural Network Pulse - Like a brain firing!
+function initializeNeuralNetworkPulse() {
+  console.log('🧠 Initializing neural network pulse...');
+  
+  // Add neural pulse to skill cards
+  document.querySelectorAll('.skill-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.animation = 'neuralPulse 1s ease-in-out infinite';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.animation = '';
+    });
+  });
+}
+
+// Dimensional Shifts - Elements that shift between dimensions!
+function initializeDimensionalShifts() {
+  console.log('🌌 Initializing dimensional shifts...');
+  
+  // Add dimensional shift to project cards
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.style.animation = 'dimensionalShift 1.5s ease-in-out';
+      setTimeout(() => {
+        card.style.animation = '';
+      }, 1500);
+    });
+  });
+}
+
+// Liquid Morphing - Shapes that flow like liquid!
+function initializeLiquidMorphing() {
+  console.log('💧 Initializing liquid morphing...');
+  
+  // Add liquid morph to floating shapes
+  document.querySelectorAll('.shape').forEach(shape => {
+    shape.addEventListener('mouseenter', () => {
+      shape.style.animation = 'liquidMorph 2s ease-in-out infinite';
+    });
+    
+    shape.addEventListener('mouseleave', () => {
+      shape.style.animation = 'float 6s ease-in-out infinite';
+    });
+  });
+}
+
+// Holographic Effects - Like a hologram coming to life!
+function initializeHolographicEffects() {
+  console.log('🌈 Initializing holographic effects...');
+  
+  // Add holographic shimmer to social links
+  document.querySelectorAll('.social-link').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      link.style.animation = 'holographicShimmer 1s ease-in-out infinite';
+    });
+    
+    link.addEventListener('mouseleave', () => {
+      link.style.animation = '';
+    });
+  });
+}
+
+// Particle Explosion on Click - When you click, particles explode everywhere!
+function createParticleExplosion(x, y) {
+  const colors = ['#6366f1', '#06b6d4', '#f59e0b', '#10b981', '#ef4444'];
+  
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle-explosion';
+    
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = (Math.PI * 2 * i) / 20;
+    const velocity = 50 + Math.random() * 100;
+    const size = 3 + Math.random() * 5;
+    
+    particle.style.cssText = `
+      position: fixed;
+      left: ${x}px;
+      top: ${y}px;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      animation: particleExplosion 1s ease-out forwards;
+      transform: translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px);
+    `;
+    
+    document.body.appendChild(particle);
+    
+    setTimeout(() => {
+      document.body.removeChild(particle);
+    }, 1000);
+  }
+}
+
+// Add click explosion effect to the entire page
+document.addEventListener('click', (e) => {
+  createParticleExplosion(e.clientX, e.clientY);
+});
+
+// Time Warp Effect - Smooth, elegant space-time distortion!
+function initializeTimeWarp() {
+  console.log('⏰ Initializing time warp effects...');
+  
+  // Add time warp to scroll events - but much more subtle and smooth
+  let lastScrollTime = 0;
+  window.addEventListener('scroll', () => {
+    const now = Date.now();
+    if (now - lastScrollTime > 200) { // Reduced frequency for smoother experience
+      lastScrollTime = now;
+      
+      // Much more subtle time warp effect
+      if (Math.random() > 0.98) { // Even more rare
+        const elements = document.querySelectorAll('.floating-icon, .shape');
+        const randomElement = elements[Math.floor(Math.random() * elements.length)];
+        
+        if (randomElement) {
+          randomElement.style.animation = 'timeWarp 1.5s ease-in-out';
+          setTimeout(() => {
+            randomElement.style.animation = '';
+          }, 1500);
+        }
+      }
+    }
+  });
+}
+
+// Initialize time warp
+initializeTimeWarp();
+
+// Cursor Trail Effect - Leaves a beautiful trail behind the cursor
+function initializeCursorTrail() {
+  console.log('✨ Initializing cursor trail effect...');
+  
+  let trailElements = [];
+  const maxTrailLength = 10;
+  
+  document.addEventListener('mousemove', (e) => {
+    // Create trail element
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.left = e.clientX + 'px';
+    trail.style.top = e.clientY + 'px';
+    
+    document.body.appendChild(trail);
+    trailElements.push(trail);
+    
+    // Remove old trail elements
+    if (trailElements.length > maxTrailLength) {
+      const oldTrail = trailElements.shift();
+      if (oldTrail && oldTrail.parentNode) {
+        oldTrail.parentNode.removeChild(oldTrail);
+      }
+    }
+    
+    // Remove trail element after animation
+    setTimeout(() => {
+      if (trail && trail.parentNode) {
+        trail.parentNode.removeChild(trail);
+      }
+    }, 500);
+  });
+}
+
+// Initialize cursor trail
+initializeCursorTrail();
+
+// Personal Status Rotator - Changes my status periodically
+function initializePersonalStatus() {
+  console.log('🎭 Initializing personal status rotator...');
+  
+  const statusElement = document.querySelector('.personal-status .status-text');
+  const emojiElement = document.querySelector('.personal-status .status-emoji');
+  
+  const statuses = [
+    { emoji: '🚀', text: 'Building the future' },
+    { emoji: '💡', text: 'Ideas flowing' },
+    { emoji: '⚡', text: 'Coding at light speed' },
+    { emoji: '🎨', text: 'Creating magic' },
+    { emoji: '🧠', text: 'Solving problems' },
+    { emoji: '🌟', text: 'Making dreams reality' }
+  ];
+  
+  let currentIndex = 0;
+  
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % statuses.length;
+    const status = statuses[currentIndex];
+    
+    // Smooth transition
+    statusElement.style.opacity = '0';
+    emojiElement.style.opacity = '0';
+    
+    setTimeout(() => {
+      statusElement.textContent = status.text;
+      emojiElement.textContent = status.emoji;
+      statusElement.style.opacity = '1';
+      emojiElement.style.opacity = '1';
+    }, 200);
+  }, 3000); // Change every 3 seconds
+}
+
+// Initialize personal status
+initializePersonalStatus();
+
+// Add some insane console commands
+window.portfolio = {
+  changeTheme: () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(currentTheme);
+  },
+  showNotification: showNotification,
+  scrollToSection: scrollToSection,
+  version: '3.0.0',
+  author: 'Sivan Pushpagiri',
+  // NEW INSANE COMMANDS!
+  glitch: () => {
+    document.querySelectorAll('*').forEach(el => {
+      el.style.animation = 'glitch 0.5s ease-in-out';
+      setTimeout(() => el.style.animation = '', 500);
+    });
+  },
+  matrix: () => {
+    document.body.style.filter = 'hue-rotate(120deg)';
+    setTimeout(() => document.body.style.filter = '', 2000);
+  },
+  quantum: () => {
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.style.animation = 'quantumTunnel 1s ease-in-out';
+      setTimeout(() => card.style.animation = '', 1000);
+    });
+  },
+  explode: () => {
+    createParticleExplosion(window.innerWidth / 2, window.innerHeight / 2);
+  }
+};
+
+console.log('%c🎉 Portfolio loaded! Try these INSANE commands:', 'color: #f59e0b; font-size: 14px;');
+console.log('%cportfolio.glitch() - Glitch everything!', 'color: #ef4444; font-size: 12px;');
+console.log('%cportfolio.matrix() - Matrix mode!', 'color: #10b981; font-size: 12px;');
+console.log('%cportfolio.quantum() - Quantum tunnel effect!', 'color: #6366f1; font-size: 12px;');
+console.log('%cportfolio.explode() - Particle explosion!', 'color: #f59e0b; font-size: 12px;');
+
+console.log('✨ All systems initialized! Portfolio is ready to BLOW MINDS! 🚀');
